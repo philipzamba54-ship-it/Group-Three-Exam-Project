@@ -75,3 +75,10 @@ exports.myGroups = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+//group members leaving the group
+ exports.leaveGroup =async (req, res) => {
+    const { groupId } =req.params;
+    const userid = req.user.Id;
+    await db.query ('DELETE FROM Groupmember WHRE user_id =? AND group_id =?',[user_Id,groupId]);
+    res.json({ message: 'you have left the group'});
+    };
