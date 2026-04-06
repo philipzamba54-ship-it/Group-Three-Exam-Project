@@ -13,3 +13,11 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool.promise(); // Use promises for async/await
+pool.getConnection((err, connection) => {
+    if (err) {
+        console.error('database connection failed:', err.message);
+    } else {
+        console.log('connected to MySQL database.');
+        connection.release();
+    }
+});
